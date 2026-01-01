@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Ht3aa\ZainCash\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ZainCashCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'zain-cash';
 
     public $description = 'My command';
 
