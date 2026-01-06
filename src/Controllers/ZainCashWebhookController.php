@@ -7,14 +7,13 @@ use Firebase\JWT\Key;
 use Ht3aa\ZainCash\Models\ZainCashTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ZainCashWebhookController
 {
     public function handle(Request $request)
     {
-        if (!$request->has('token')) {
+        if (! $request->has('token')) {
             throw new UnprocessableEntityHttpException('Token is required');
         }
 
@@ -24,7 +23,6 @@ class ZainCashWebhookController
         $zainCashTransaction->update([
             'status' => $result->status,
         ]);
-
 
         if (config('zain-cash.custom_webhook_url')) {
             Http::post(config('zain-cash.custom_webhook_url'), [
