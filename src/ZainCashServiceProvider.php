@@ -19,7 +19,8 @@ class ZainCashServiceProvider extends PackageServiceProvider
             ->name('zain-cash')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_zain_cash_table')
+            ->hasMigrations('create_zain_cash_transactions_table')
+            ->hasRoute('api')
             ->hasCommand(ZainCashCommand::class);
     }
 }

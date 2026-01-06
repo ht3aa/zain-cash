@@ -15,6 +15,14 @@ You can install the package via composer:
 composer require ht3aa/zain-cash
 ```
 
+```bash
+php artisan vendor:publish --tag="zain-cash-config"
+```
+
+```bash
+php artisan vendor:publish --tag="zain-cash-migrations"
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

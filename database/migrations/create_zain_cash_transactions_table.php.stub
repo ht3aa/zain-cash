@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('zain_cash_transactions', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('amount', 10, 2);
+            $table->string('service_type');
+            $table->string('order_id');
+            $table->string('redirect_url');
+            $table->string('token');
+            $table->timestamp('iat');
+            $table->timestamp('exp');
+            $table->json('zain_cash_response')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('zain_cash_transactions');
+    }
+};
