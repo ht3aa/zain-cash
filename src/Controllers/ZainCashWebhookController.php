@@ -4,7 +4,6 @@ namespace Ht3aa\ZainCash\Controllers;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Ht3aa\ZainCash\Facades\ZainCash;
 use Ht3aa\ZainCash\Models\ZainCashTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;

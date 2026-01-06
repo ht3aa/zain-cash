@@ -7,7 +7,6 @@ use Ht3aa\ZainCash\Models\ZainCashTransaction;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ZainCash
@@ -29,7 +28,7 @@ class ZainCash
     public function __construct()
     {
         $this->base_url = config('zain-cash.is_production') ? 'https://api.zaincash.iq' : 'https://test.zaincash.iq';
-        $this->payment_redirect_url = $this->base_url . '/transaction/pay?id=';
+        $this->payment_redirect_url = $this->base_url.'/transaction/pay?id=';
         $this->merchant_secret = config('zain-cash.merchant_secret');
         $this->merchant_id = config('zain-cash.merchant_id');
         $this->msisdn = config('zain-cash.msisdn');
@@ -61,7 +60,7 @@ class ZainCash
             ],
         ];
         $context = stream_context_create($options);
-        $response = json_decode(file_get_contents($this->base_url . '/transaction/init', false, $context), true);
+        $response = json_decode(file_get_contents($this->base_url.'/transaction/init', false, $context), true);
 
         if ($this->responseFailed($response)) {
             Log::error('Failed to initiate transaction', $response);
@@ -71,7 +70,7 @@ class ZainCash
         $transaction->iat = $data['iat'];
         $transaction->exp = $data['exp'];
         $transaction->token = $data['token'];
-        $transaction->payment_redirect_url = $this->payment_redirect_url . $response['id'];
+        $transaction->payment_redirect_url = $this->payment_redirect_url.$response['id'];
         $transaction->zain_cash_response = $response;
         $transaction->status = $response['status'];
         $transaction->transaction_id = $response['id'];
@@ -83,15 +82,15 @@ class ZainCash
     {
         $transaction = ZainCashTransaction::where('transaction_id', $transaction_id)->first();
 
-        if (!$transaction) {
+        if (! $transaction) {
             throw new UnprocessableEntityHttpException('Transaction not found');
         }
 
         $data = [
-            'id'  => $transaction_id,
-            'msisdn'  => $this->msisdn,
-            'iat'  => time(),
-            'exp'  => time() + 60 * 60 * 4
+            'id' => $transaction_id,
+            'msisdn' => $this->msisdn,
+            'iat' => time(),
+            'exp' => time() + 60 * 60 * 4,
         ];
 
         $data['token'] = urlencode(JWT::encode($data, $this->merchant_secret, 'HS256'));
@@ -106,7 +105,7 @@ class ZainCash
         ];
 
         $context = stream_context_create($options);
-        $response = json_decode(file_get_contents($this->base_url . '/transaction/get', false, $context), true);
+        $response = json_decode(file_get_contents($this->base_url.'/transaction/get', false, $context), true);
 
         if ($this->responseFailed($response)) {
             Log::error('Failed to initiate transaction', $response);
