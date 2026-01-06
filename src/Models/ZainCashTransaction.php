@@ -3,6 +3,7 @@
 namespace Ht3aa\ZainCash\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ZainCashTransaction extends Model
 {
@@ -10,6 +11,7 @@ class ZainCashTransaction extends Model
         'amount',
         'service_type',
         'order_id',
+        'order_type',
         'redirect_url',
         'token',
         'iat',
@@ -26,4 +28,9 @@ class ZainCashTransaction extends Model
         'exp' => 'datetime',
         'zain_cash_response' => 'array',
     ];
+
+    public function order(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

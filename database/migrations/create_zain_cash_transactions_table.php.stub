@@ -12,12 +12,15 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount', 10, 2);
             $table->string('service_type');
-            $table->string('order_id');
+            $table->morphs('order');
             $table->string('redirect_url');
-            $table->string('token');
+            $table->text('token');
             $table->timestamp('iat');
             $table->timestamp('exp');
-            $table->json('zain_cash_response')->nullable();
+            $table->json('zain_cash_response');
+            $table->string('status')->default('pending');
+            $table->text('payment_redirect_url');
+            $table->string('transaction_id');
             $table->timestamps();
         });
     }

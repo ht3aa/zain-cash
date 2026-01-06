@@ -185,7 +185,8 @@ public function initiatePayment(Request $request)
     $transaction = ZainCashTransaction::create([
         'amount' => $request->amount,
         'service_type' => 'Product Purchase',
-        'order_id' => 'ORDER-' . time(),
+        'order_id' => Order::find(1),
+        'order_type' => Order::class,
         'redirect_url' => route('payment.callback'),
     ]);
 
