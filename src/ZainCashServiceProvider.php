@@ -2,9 +2,9 @@
 
 namespace Ht3aa\ZainCash;
 
+use Ht3aa\ZainCash\Commands\ZainCashCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Ht3aa\ZainCash\Commands\ZainCashCommand;
 
 class ZainCashServiceProvider extends PackageServiceProvider
 {

@@ -2,9 +2,9 @@
 
 namespace Ht3aa\ZainCash\Tests;
 
+use Ht3aa\ZainCash\ZainCashServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Ht3aa\ZainCash\ZainCashServiceProvider;
 
 class TestCase extends Orchestra
 {
